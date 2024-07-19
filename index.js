@@ -29,6 +29,8 @@ app.get("/topics", async (req, res) => {
     console.log(topics)
     res.render("topics/topics", { topics })
 })
+
+
 app.get("/topics/:id", async (req, res) => {
     const { id } = req.params
     const topic = await Topic.findById(id)
