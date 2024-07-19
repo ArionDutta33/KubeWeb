@@ -6,28 +6,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/css/output.css">
+
 </head>
 
 <body>
     <div
         class="text-white absolute top-0 z-[-2] min-h-screen w-screen bg-[#000000] bg-[radial-gradient(#ffffff33_1px,#00091d_1px)] bg-[size:20px_20px]">
-        <nav class=" px-4 py-6 border-b">
+        <nav class="px-4 py-6 border-b">
             <div class="logo text-2xl font-bold"><span class="text-blue-400">Cloud</span>TechDocs</div>
-
-
-
         </nav>
-        <div class="main border px-8 py-12 flex flex-col gap-4 ">
-            <% for(let topic of topics){ %>
-                <div class="text-white text-xl underline rounded-lg px-4 py-4 bg-blue-400">
-                    <a href="/topics/<%=topic._id  %>">
-                        <%=topic.title %>
-                    </a>
-                </div>
-                <% } %>
+        <div class="main  px-8 py-12 flex flex-col gap-4 ">
+            <!-- Search Bar -->
+            <input class="text-black px-4 py-4 rounded-lg" type="text" id="searchInput" placeholder="Search topics..."
+                class="search-bar" onkeyup="filterTopics()">
+
+            <!-- Topics List -->
+            <div id="topicsList" class="flex flex-col  min-h-screen">
+                <% for(let topic of topics){ %>
+                    <div class="text-white text-xl underline rounded-lg px-4 py-4 bg-blue-400 topic-item my-4">
+                        <a href="/topics/<%= topic._id %>">
+                            <%= topic.title %>
+                        </a>
+                    </div>
+                    <% } %>
+            </div>
         </div>
     </div>
 
+    <script>
+        function filterTopics() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const topicItems = document.querySelectorAll('.topic-item');
+
+            topicItems.forEach(item => {
+                const title = item.textContent.toLowerCase();
+                if (title.includes(input)) {
+                    item.style.display = '';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>
