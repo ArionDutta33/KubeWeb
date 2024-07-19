@@ -29,7 +29,9 @@ app.get("/topics", async (req, res) => {
     console.log(topics)
     res.render("topics/topics", { topics })
 })
-
+app.get("/register", (req, res) => {
+    res.render("topics/registration")
+})
 
 app.get("/topics/:id", async (req, res) => {
     const { id } = req.params
